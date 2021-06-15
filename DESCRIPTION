@@ -1,0 +1,24 @@
+Package: jdtools
+Title: Helpful Tools and Code for Programming in R
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Jonathan",
+           family = "Trattner",
+           role = c("aut", "cre"),
+           email = "jdt@jdtrat.com",
+           comment = c(ORCID = "0000-0002-1097-7603"))
+Description: Provides useful functions for a variety of programming challenges in R.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Language: es
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1.9000
+Imports: 
+    gargle,
+    sodium,
+    utils,
+    glue,
+    fs
+Suggests: 
+    usethis
