@@ -5,8 +5,8 @@ secret_pw_get <- utils::getFromNamespace("secret_pw_get", "gargle")
 secret_nonce <- utils::getFromNamespace("secret_nonce", "gargle")
 secret_path <- utils::getFromNamespace("secret_path", "gargle")
 
-stop_bad_class <- utils::getFromNamespace("stop_bad_class", "gargle")
-stop_secret <-  utils::getFromNamespace("stop_secret", "gargle")
+gargle_abort_bad_class <- utils::getFromNamespace("gargle_abort_bad_class", "gargle")
+gargle_abort_secret <-  utils::getFromNamespace("gargle_abort_secret", "gargle")
 
 
 # Modified slightly from the {boxr} package
@@ -75,7 +75,7 @@ encrypt_token <- function(service, input, destination) {
     input <- readBin(input, "raw", file.size(input))
   }
   else if (!is.raw(input)) {
-    stop_bad_class(input, c("character", "raw"))
+    gargle_abort_bad_class(input, c("character", "raw"))
   }
   destdir <- fs::path(destination, "secret")
   fs::dir_create(destdir)
@@ -102,7 +102,7 @@ encrypt_token <- function(service, input, destination) {
 decrypt_token <- function(service, path, complete = FALSE) {
 
   if (!secret_can_decrypt(service)) {
-    stop_secret(message = "Decryption not available", package = service)
+    gargle_abort_secret(message = "Decryption not available", package = service)
   }
   raw <- readBin(path, "raw", file.size(path))
   output <- sodium::data_decrypt(bin = raw, key = secret_pw_get(service),
