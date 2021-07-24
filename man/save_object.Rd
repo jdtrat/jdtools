@@ -7,7 +7,7 @@
 \usage{
 save_object(x, path, filename_modifier = NULL, sep = "_")
 
-load_object(x, path, filename_modifier = NULL, sep = "_")
+load_object(x, path, filename_modifier = NULL, sep = "_", auto_assign = TRUE)
 }
 \arguments{
 \item{x}{The R object to save.}
@@ -22,6 +22,9 @@ more details.}
 \item{sep}{Ignored by default. If \code{filename_modifier} is used, this is a
 character string used to separate the object name and modifier when writing
 the .RDS file.}
+
+\item{auto_assign}{\strong{Only for \code{load_object()}} and \code{TRUE} by default. Should
+the object loaded automatically be assigned to the parent environment?}
 }
 \value{
 Either a .RDS file written to the specified location or an R object
@@ -38,11 +41,10 @@ benefit of these functions is the consistency between the name of the R
 object and the .RDS file name.
 
 Additionally, for analyses where there are lots of objects to be
-saved/loaded, there are utilities to specify where these objects will be, e.g.
-\code{\link{set_object_path}}.
+saved/loaded, there are utilities to specify where these objects will be,
+e.g. \code{\link{set_object_path}}.
 }
 \examples{
-
 
 if (interactive()) {
   library(fs)
@@ -61,7 +63,12 @@ if (interactive()) {
   dir_ls(here('test-folder'))
 
   # The object can be loaded easily as:
-  mtcars <- load_object(mtcars, path = "test-folder")
+  # This automatically assigns the object loaded as mtcars.
+  load_object(mtcars, path = "test-folder")
+
+  # If you wish to assign an object yourself,
+  # for example as a different name, this can be done as follows:
+  carsmt <- load_object(mtcars, path = "test-folder", auto_assign = FALSE)
 
   # .RDS files can also have a modifier to distinguish between similar R objects.
   mtcars <- mtcars[,1:3]
@@ -98,8 +105,8 @@ if (interactive()) {
   load_object(iris, path = "another-test-folder")
 
   # Let's compare these
-  orig <- load_object(iris)
-  new <- load_object(iris, path = "another-test-folder")
+  orig <- load_object(iris, auto_assign = FALSE)
+  new <- load_object(iris, path = "another-test-folder", auto_assign = FALSE)
 
   # Should not be identical!
   compare(orig, new)
@@ -111,9 +118,7 @@ if (interactive()) {
   unset_object_path()
 
 }
-
-
 }
 \seealso{
-utils-save-load
+set_object_path, get_object_oath, unset_object_path
 }

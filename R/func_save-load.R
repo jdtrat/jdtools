@@ -7,7 +7,10 @@ get_name <- function(modifier = NULL, .sep = "_") {
   if (is.null(modifier)) {
     out_name <- paste0(jt$name, ".RDS")
   } else if (!is.null(modifier)) {
-    out_name <- paste0(paste(jt$name, modifier, sep = .sep), ".RDS")
+    # Update environmental variable's name with modifier for
+    # use with auto assign
+    jt$name <- paste(jt$name, modifier, sep = .sep)
+    out_name <- paste0(jt$name, ".RDS")
   }
 
   # If the out_name has length 3, it's most likely an R object from a package
@@ -63,8 +66,8 @@ get_path <- function(.path) {
 #' object and the .RDS file name.
 #'
 #' Additionally, for analyses where there are lots of objects to be
-#' saved/loaded, there are utilities to specify where these objects will be, e.g.
-#' \code{\link{set_object_path}}.
+#' saved/loaded, there are utilities to specify where these objects will be,
+#' e.g. \code{\link{set_object_path}}.
 #'
 #' @param x The R object to save.
 #' @param path A directory within the current RStudio Project.
@@ -75,16 +78,17 @@ get_path <- function(.path) {
 #' @param sep Ignored by default. If `filename_modifier` is used, this is a
 #'   character string used to separate the object name and modifier when writing
 #'   the .RDS file.
+#' @param auto_assign **Only for `load_object()`** and `TRUE` by default. Should
+#'   the object loaded automatically be assigned to the parent environment?
 #'
 #' @return Either a .RDS file written to the specified location or an R object
 #'   containing the contents of the .RDS file.
 #'
-#' @seealso utils-save-load
+#' @seealso set_object_path, get_object_oath, unset_object_path
 #'
 #' @export
 #'
 #' @examples
-#'
 #'
 #' if (interactive()) {
 #'   library(fs)
@@ -103,7 +107,12 @@ get_path <- function(.path) {
 #'   dir_ls(here('test-folder'))
 #'
 #'   # The object can be loaded easily as:
-#'   mtcars <- load_object(mtcars, path = "test-folder")
+#'   # This automatically assigns the object loaded as mtcars.
+#'   load_object(mtcars, path = "test-folder")
+#'
+#'   # If you wish to assign an object yourself,
+#'   # for example as a different name, this can be done as follows:
+#'   carsmt <- load_object(mtcars, path = "test-folder", auto_assign = FALSE)
 #'
 #'   # .RDS files can also have a modifier to distinguish between similar R objects.
 #'   mtcars <- mtcars[,1:3]
@@ -140,8 +149,8 @@ get_path <- function(.path) {
 #'   load_object(iris, path = "another-test-folder")
 #'
 #'   # Let's compare these
-#'   orig <- load_object(iris)
-#'   new <- load_object(iris, path = "another-test-folder")
+#'   orig <- load_object(iris, auto_assign = FALSE)
+#'   new <- load_object(iris, path = "another-test-folder", auto_assign = FALSE)
 #'
 #'   # Should not be identical!
 #'   compare(orig, new)
@@ -153,8 +162,6 @@ get_path <- function(.path) {
 #'   unset_object_path()
 #'
 #' }
-#'
-#'
 save_object <- function(x, path, filename_modifier = NULL, sep = "_") {
 
   jt$name <- substitute(x)
@@ -170,15 +177,28 @@ save_object <- function(x, path, filename_modifier = NULL, sep = "_") {
 
 #' @rdname save_object
 #' @export
-load_object <- function(x, path, filename_modifier = NULL, sep = "_") {
+load_object <- function(x, path, filename_modifier = NULL, sep = "_", auto_assign = TRUE) {
 
   jt$name <- substitute(x)
 
-  object <- readRDS(here::here(get_path(path), get_name(modifier = filename_modifier,
-                                              .sep = sep)))
+  rds_path <- here::here(get_path(path), get_name(modifier = filename_modifier, .sep = sep))
 
-  return(object)
+  if (auto_assign) {
+    object <- paste(jt$name)
+
+    assign(object, readRDS(rds_path), envir = parent.frame())
+
+    cli::cli_div(theme = list(span.code = list(color = "blue", "background-color" = NULL)))
+    cli::cli_text("{.code {object} <- readRDS(\"{rds_path}\")}")
+    cli::cli_end()
+
+  } else if (!auto_assign) {
+    return(
+      readRDS(rds_path)
+    )
+  }
 
   on.exit(rm("name", envir = jt), add = TRUE)
 
 }
+
