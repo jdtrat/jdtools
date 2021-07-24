@@ -65,7 +65,7 @@ get_object_path <- function() {
   if (is.null(path)) {
     cli::cli_alert_danger("Option {.envvar jdtools.rds.path} is not set. \n To set the directory for saving objects, call {.code jdtools::set_object_path()}")
   } else {
-    cli::cli_alert_success("{.envvar jdtools.rds.path} option is set to {.file {here::here(path)}}.")
+    here::here(path)
   }
 
 }
