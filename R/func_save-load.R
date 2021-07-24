@@ -169,6 +169,7 @@ save_object <- function(x, path, filename_modifier = NULL, sep = "_") {
 }
 
 #' @rdname save_object
+#' @export
 load_object <- function(x, path, filename_modifier = NULL, sep = "_") {
 
   jt$name <- substitute(x)
