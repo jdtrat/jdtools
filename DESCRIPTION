@@ -19,6 +19,9 @@ Imports:
     sodium,
     utils,
     glue,
-    fs
+    fs,
+    here,
+    cli
 Suggests: 
-    usethis
+    usethis,
+    waldo
