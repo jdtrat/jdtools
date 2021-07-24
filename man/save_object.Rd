@@ -2,9 +2,12 @@
 % Please edit documentation in R/func_save-load.R
 \name{save_object}
 \alias{save_object}
+\alias{load_object}
 \title{Save/Load R Objects as .RDS files.}
 \usage{
 save_object(x, path, filename_modifier = NULL, sep = "_")
+
+load_object(x, path, filename_modifier = NULL, sep = "_")
 }
 \arguments{
 \item{x}{The R object to save.}

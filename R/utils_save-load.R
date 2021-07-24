@@ -1,4 +1,6 @@
 
+jt <- new.env(parent = emptyenv())
+
 unknown_error_msg <- function() {
   cli::cli_abort("Unknown error. Please try supplying a different object, or filing an issue at {.url https://github.com/jdtrat/jdtools/issues}.")
 }

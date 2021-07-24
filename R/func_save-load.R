@@ -2,22 +2,12 @@
 #' Get Name of Object to Save/Load
 #' @keywords internal
 #' @noRd
-get_name <- function(.x, modifier = NULL, .sep = "_") {
-
-  name <- quote(substitute(.x)) # equal to substitute(.x)
-  val <- eval(name) # equal to quote(x)
-
-  # Work up the environments, resetting the substituted value
-  # for the evaluated version
-  for (i in sys.frames()) {
-    name[[2]] <- val
-    val <- eval(name, i)
-  }
+get_name <- function(modifier = NULL, .sep = "_") {
 
   if (is.null(modifier)) {
-    out_name <- paste0(val, ".RDS")
+    out_name <- paste0(jt$name, ".RDS")
   } else if (!is.null(modifier)) {
-    out_name <- paste0(paste(val, modifier, sep = .sep), ".RDS")
+    out_name <- paste0(paste(jt$name, modifier, sep = .sep), ".RDS")
   }
 
   # If the out_name has length 3, it's most likely an R object from a package
@@ -167,19 +157,27 @@ get_path <- function(.path) {
 #'
 save_object <- function(x, path, filename_modifier = NULL, sep = "_") {
 
+  jt$name <- substitute(x)
+
   saveRDS(object = x,
-          file = here::here(get_path(path), get_name(.x = x,
-                                                     modifier = filename_modifier,
+          file = here::here(get_path(path), get_name(modifier = filename_modifier,
                                                      .sep = sep))
           )
 
+  on.exit(rm("name", envir = jt), add = TRUE)
+
 }
 
-#' @describeIn save_object
+#' @rdname save_object
 load_object <- function(x, path, filename_modifier = NULL, sep = "_") {
 
-  readRDS(here::here(get_path(path), get_name(.x = x,
-                                              modifier = filename_modifier,
+  jt$name <- substitute(x)
+
+  object <- readRDS(here::here(get_path(path), get_name(modifier = filename_modifier,
                                               .sep = sep)))
+
+  return(object)
+
+  on.exit(rm("name", envir = jt), add = TRUE)
 
 }
