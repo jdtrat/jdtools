@@ -23,7 +23,8 @@ Imports:
     here,
     cli,
     crayon,
-    rstudioapi
+    rstudioapi,
+    remotes
 Suggests: 
     testthat (>= 3.0.0),
     usethis,
