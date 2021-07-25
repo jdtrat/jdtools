@@ -14,7 +14,9 @@ NA; used for side effects to set the global option
 \code{jdtools.rds.path}.
 }
 \description{
-Set global path option for saving/loading objects
+This function will set the global option for saving/loading objects with
+\code{jdtools} functions so you do not have to specify the \code{path} parameter when
+calling \code{\link{save_object}} and \code{\link{load_object}}.
 }
 \examples{
 

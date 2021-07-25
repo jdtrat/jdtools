@@ -6,7 +6,20 @@ unknown_error_msg <- function() {
 }
 
 
+
+set_object_path_internal <- function(.path) {
+  options(jdtools.rds.path = .path)
+
+  if (getOption("jdtools.rds.path") == .path) {
+    cli::cli_alert_success("Calling {.code jdtools::save_object()} will save objects to {.file {here::here(.path)}}.")
+  }
+}
+
 #' Set global path option for saving/loading objects
+#'
+#' This function will set the global option for saving/loading objects with
+#' `jdtools` functions so you do not have to specify the `path` parameter when
+#' calling \code{\link{save_object}} and \code{\link{load_object}}.
 #'
 #' @param path A directory within the current RStudio Project
 #'
@@ -28,11 +41,22 @@ unknown_error_msg <- function() {
 #'
 set_object_path <- function(path) {
 
-  options(jdtools.rds.path = path)
+  path <- here::here(path)
 
-  if (getOption("jdtools.rds.path") == path) {
-    cli::cli_alert_success("Calling {.code jdtools::save_object()} will save objects to {.file {here::here(path)}}.")
+  if (fs::dir_exists(path)) {
+    set_object_path_internal(path)
+  } else if (!fs::dir_exists(path)) {
+    yes_no(prompt = "The directory {.file {path}} does not exist. Would you like to create it?",
+           yes_action = {
+             fs::dir_create(path)
+             cli::cli_alert_success("Created directory at {.file {path}}")
+             set_object_path_internal(path)
+             print("blah")
+             },
+           no_message ="The directory {.file {path}} was not created.
+           Try calling {.code jdtools::save_object()} with an existing directory or create one when prompted.")
   }
+
 }
 
 #' Get global path option for saving/loading objects
