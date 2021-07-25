@@ -62,6 +62,7 @@ will be executed upon a user responding "yes" or "no."
 \examples{
 
 if (interactive()) {
+
   # define a function to create a directory with approval.
   yn_create_dir <- function(path) {
     path <- here::here(path)
@@ -92,6 +93,23 @@ if (interactive()) {
          no_action = print("Wrong answer..."),
          yes_opts = crayon::green("Duh, he's the cutest"),
          no_opts = c("I'm a dog person", "I'm allergic to cats"))
+
+
+  # Conduct multiple actions like a normal R script upon a "yes" (no would work similarly)
+  path <- here::here("another-test-folder")
+  yes_no(prompt = "The directory {.file {path}} does not exist. Would you like to create it?",
+         yes_action = {
+           # create path
+           fs::dir_create(path)
+           # indicate path was created
+           cli::cli_alert_success("Created directory at {.file {path}}")
+           # assign saved_path as path
+           saved_path <- path
+           # print a random letter just because we can!
+           print(sample(letters,1))
+         },
+         no_message ="The directory {.file {path}} was not created."
+         )
 }
 
 }
