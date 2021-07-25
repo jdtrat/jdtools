@@ -22,7 +22,8 @@ Imports:
     fs,
     here,
     cli,
-    crayon
+    crayon,
+    rstudioapi
 Suggests: 
     usethis,
     waldo
