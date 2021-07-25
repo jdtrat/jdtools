@@ -14,5 +14,6 @@ NA; used for side effects.
 }
 \description{
 This function is simply a wrapper around \code{\link[rstudioapi:restartSession]{rstudioapi::restartSession()}} and,
-if called within RStudio, will restart the R session.
+if called within RStudio, will restart the R session. It's a convenient way
+to restart the current R Session.
 }

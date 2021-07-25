@@ -2,7 +2,8 @@
 #' Restart the R Session in RStudio
 #'
 #' This function is simply a wrapper around [rstudioapi::restartSession()] and,
-#' if called within RStudio, will restart the R session.
+#' if called within RStudio, will restart the R session. It's a convenient way
+#' to restart the current R Session.
 #'
 #' @param command A command (as a character string) to be run after restarting.
 #'
