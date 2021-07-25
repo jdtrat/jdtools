@@ -21,7 +21,8 @@ Imports:
     glue,
     fs,
     here,
-    cli
+    cli,
+    crayon
 Suggests: 
     usethis,
     waldo
