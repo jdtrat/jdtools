@@ -25,5 +25,7 @@ Imports:
     crayon,
     rstudioapi
 Suggests: 
+    testthat (>= 3.0.0),
     usethis,
     waldo
+Config/testthat/edition: 3
