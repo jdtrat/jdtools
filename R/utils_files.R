@@ -6,7 +6,6 @@ get_file_dir <- function(.path) {
                   before_string = "\\/")
 }
 
-
 create_file <- function(.path, .open) {
   if (fs::file_exists(.path)) {
     yes_no("The file {.file {.path}} already exists. Would you like to overwrite it?",
@@ -137,8 +136,8 @@ file_new <- function(path, ext, open = interactive()) {
 #' @export
 file_new_r <- file_new_ff("R")
 #'
-#' #' @rdname file_new
-#' #' @export
+#' @rdname file_new
+#' @export
 file_new_stan <- file_new_ff("stan")
 
 #' @rdname file_new
@@ -164,3 +163,39 @@ file_new_md <- file_new_ff("md")
 #' @rdname file_new
 #' @export
 file_new_rmd <- file_new_ff("Rmd")
+
+#' Open a File in RStudio
+#'
+#' This function is simply a wrapper around [rstudioapi::navigateToFile()] and
+#' will open the file specified by the `path` argument in the current RStudio
+#' window.
+#'
+#' @param path A character vector of the file to be opened.
+#' @param ... Additional arguments to be passed into
+#'   [rstudioapi::navigateToFile()].
+#'
+#' @return NA; used for side effects to open a file in RStudio.
+#' @export
+#'
+file_open <- function(path, ...) {
+  if (!rstudioapi::isAvailable()) {
+    cli::cli_abort("Oops. Looks like you're not using RStudio.")
+  }
+
+  path <- here::here(path)
+
+  if (fs::file_exists(path = path)) {
+    rstudioapi::navigateToFile(file = path, ...)
+  } else if (!fs::file_exists(path = path)) {
+    yes_no(
+      prompt = "It looks like you're trying to open a file {.file {path}} that does not exist. Would you like to create it?",
+      yes_action = {
+        fs::file_create(path = path)
+        cli::cli_alert_success("Created {.file {path}}. Opening now!")
+        rstudioapi::navigateToFile(path, ...)
+      },
+      no_action = return(invisible()),
+      no_message = "Okay, not creating {.file {path}}."
+    )
+  }
+}
