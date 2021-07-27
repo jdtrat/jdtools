@@ -22,6 +22,30 @@ create_file <- function(.path, .open) {
   if (.open) rstudioapi::navigateToFile(.path)
 }
 
+# Function factory version of file_new
+file_new_ff <- function(ext) {
+
+  function(path, open = interactive()) {
+    path <- here::here(paste0(path, ".", ext))
+
+    file_dir <- get_file_dir(.path = path)
+
+    if (!fs::dir_exists(file_dir)) {
+      yes_no("It looks like you're trying to create a file in a directory {.file {file_dir}} that doesn't exist yet. Would you like to create it?",
+             yes_action = {
+               fs::dir_create(file_dir)
+               create_file(path, open)
+             },
+             yes_message = "Directory {.file {file_dir}} created.",
+             no_message = "Please try creating a file in an existing directory.")
+
+    } else if (fs::dir_exists(file_dir)) {
+      create_file(path, open)
+    }
+  }
+
+}
+
 #' Create a new file
 #'
 #' @description These functions are inspired by [usethis::use_r()] to create .R files in the
@@ -50,45 +74,44 @@ create_file <- function(.path, .open) {
 #'   file_new(path = "test-folder/test-file", ext = "R")
 #'
 #'   # Create a new R file with the shortcut:
-#'   new_r(path = "test-folder/test-file")
+#'   file_new_r(path = "test-folder/test-file")
 #'
 #'   # Create a new Stan file
 #'   file_new(path = "test-folder/test-file", ext = "stan")
 #'   # Alternatively:
-#'   # new_stan(path = "test-folder/test-file")
+#'   # file_new_stan(path = "test-folder/test-file")
 #'
 #'   # Create a new JavaScript file
 #'   file_new(path = "test-folder/test-file", ext = "js")
 #'   # Alternatively:
-#'   # new_js(path = "test-folder/test-file")
+#'   # file_new_js(path = "test-folder/test-file")
 #'
 #'   # Create a new CSS file
 #'   file_new(path = "test-folder/test-file", ext = "css")
 #'   # Alternatively:
-#'   # new_css(path = "test-folder/test-file")
+#'   # file_new_css(path = "test-folder/test-file")
 #'
 #'   # Create a new HTML file
 #'   file_new(path = "test-folder/test-file", ext = "html")
 #'   # Alternatively:
-#'   # new_html(path = "test-folder/test-file")
+#'   # file_new_html(path = "test-folder/test-file")
 #'
 #'   # Create a new Text file
 #'   file_new(path = "test-folder/test-file", ext = "txt")
 #'   # Alternatively:
-#'   # new_txt(path = "test-folder/test-file")
+#'   # file_new_text(path = "test-folder/test-file")
 #'
 #'   # Create a new Markdown file
 #'   file_new(path = "test-folder/test-file", ext = "md")
 #'   # Alternatively:
-#'   # new_md(path = "test-folder/test-file")
+#'   # file_new_md(path = "test-folder/test-file")
 #'
 #'   # Create a new RMarkdown file
 #'   file_new(path = "test-folder/test-file", ext = "Rmd")
 #'   # Alternatively:
-#'   # new_rmd(path = "test-folder/test-file")
+#'   # file_new_rmd(path = "test-folder/test-file")
 #'
 #' }
-#'
 #'
 file_new <- function(path, ext, open = interactive()) {
 
@@ -108,69 +131,36 @@ file_new <- function(path, ext, open = interactive()) {
   } else if (fs::dir_exists(file_dir)) {
     create_file(path, open)
   }
-
 }
 
 #' @rdname file_new
 #' @export
-file_new_r <- function(path, open = interactive()) {
-  file_new(path = path,
-           ext = "R",
-           open = open)
-}
+file_new_r <- file_new_ff("R")
+#'
+#' #' @rdname file_new
+#' #' @export
+file_new_stan <- file_new_ff("stan")
 
 #' @rdname file_new
 #' @export
-file_new_stan <- function(path, open = interactive()) {
-  file_new(path = path,
-           ext = "stan",
-           open = open)
-}
+file_new_js <- file_new_ff("js")
 
 #' @rdname file_new
 #' @export
-file_new_js <- function(path, open = interactive()) {
-  file_new(path = path,
-           ext = "js",
-           open = open)
-}
+file_new_css <- file_new_ff("css")
 
 #' @rdname file_new
 #' @export
-file_new_css <- function(path, open = interactive()) {
-  file_new(path = path,
-           ext = "css",
-           open = open)
-}
+file_new_html <- file_new_ff("html")
 
 #' @rdname file_new
 #' @export
-file_new_html <- function(path, open = interactive()) {
-  file_new(path = path,
-           ext = "html",
-           open = open)
-}
+file_new_text <- file_new_ff("txt")
 
 #' @rdname file_new
 #' @export
-file_new_text <- function(path, open = interactive()) {
-  file_new(path = path,
-           ext = "txt",
-           open = open)
-}
+file_new_md <- file_new_ff("md")
 
 #' @rdname file_new
 #' @export
-file_new_md <- function(path, open = interactive()) {
-  file_new(path = path,
-           ext = "md",
-           open = open)
-}
-
-#' @rdname file_new
-#' @export
-file_new_rmd <- function(path, open = interactive()) {
-  file_new(path = path,
-           ext = "Rmd",
-           open = open)
-}
+file_new_rmd <- file_new_ff("Rmd")
