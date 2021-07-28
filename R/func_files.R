@@ -152,7 +152,7 @@ file_open <- function(path, ...) {
   if (fs::file_exists(path = path)) {
     rstudioapi::navigateToFile(file = path, ...)
   } else if (!fs::file_exists(path = path)) {
-    yes_no(
+    cl_yes_no(
       prompt = "It looks like you're trying to open a file {.file {path}} that does not exist. Would you like to create it?",
       yes_action = {
         fs::file_create(path = path)

@@ -46,7 +46,7 @@ set_object_path <- function(path) {
   if (fs::dir_exists(path)) {
     set_object_path_internal(path)
   } else if (!fs::dir_exists(path)) {
-    yes_no(prompt = "The directory {.file {path}} does not exist. Would you like to create it?",
+    cl_yes_no(prompt = "The directory {.file {path}} does not exist. Would you like to create it?",
            yes_action = {
              fs::dir_create(path)
              cli::cli_alert_success("Created directory at {.file {path}}")

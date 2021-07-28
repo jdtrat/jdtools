@@ -4,7 +4,8 @@
 #' It's inspired by [usethis::ui_yeah()], allowing for you to specify code that
 #' will be executed upon a user responding "yes" or "no."
 #'
-#' @param prompt A character string with the yes/no question to be asked.
+#' @param prompt A character string with the yes/no question to be asked. Passed
+#'   into [cli::cli_text()] and can use its theming syntax.
 #' @param yes_action Code to execute upon a "yes" answer.
 #' @param yes_message (Optional) message to display upon a "yes" answer. Passed
 #'   into [cli::cli_alert_success()] and can use its theming syntax.
@@ -36,7 +37,7 @@
 #'   # define a function to create a directory with approval.
 #'   yn_create_dir <- function(path) {
 #'     path <- here::here(path)
-#'     yes_no(prompt = "The directory {.file {path}} does not exist. Would you like to create it?",
+#'     cl_yes_no(prompt = "The directory {.file {path}} does not exist. Would you like to create it?",
 #'            yes_action = fs::dir_create(path),
 #'            yes_message = "Okay, creating {.file {path}}.",
 #'            no_message ="Okay, not creating {.file {path}}.")
@@ -46,19 +47,19 @@
 #'   yn_create_dir("new-folder")
 #'
 #'   # Ask a simple yes/no question that prints a conditional response
-#'   yes_no(prompt = "Do you love sushi?",
+#'   cl_yes_no(prompt = "Do you love sushi?",
 #'          yes_action = print("I'm not surprised, it's great!"),
 #'          no_action = print("Hmmm...have you tried it?"))
 #'
 #'   # Simple yes/no with content-related yes/no options
-#'   yes_no(prompt = "Is your favorite cat Tucker?",
+#'   cl_yes_no(prompt = "Is your favorite cat Tucker?",
 #'          yes_action = print("Correct answer!"),
 #'          no_action = print("Wrong answer..."),
 #'          yes_opts = "Duh, he's the cutest",
 #'          no_opts = c("I'm a dog person", "I'm allergic to cats"))
 #'
 #'   # Add some color (indicating the correct answer in this case)
-#'   yes_no(prompt = "Is your favorite cat Tucker?",
+#'   cl_yes_no(prompt = "Is your favorite cat Tucker?",
 #'          yes_action = print("Correct answer!"),
 #'          no_action = print("Wrong answer..."),
 #'          yes_opts = crayon::green("Duh, he's the cutest"),
@@ -67,7 +68,7 @@
 #'
 #'   # Conduct multiple actions like a normal R script upon a "yes" (no would work similarly)
 #'   path <- here::here("another-test-folder")
-#'   yes_no(prompt = "The directory {.file {path}} does not exist. Would you like to create it?",
+#'   cl_yes_no(prompt = "The directory {.file {path}} does not exist. Would you like to create it?",
 #'          yes_action = {
 #'            # create path
 #'            fs::dir_create(path)
@@ -82,7 +83,7 @@
 #'          )
 #' }
 #'
-yes_no <- function(prompt,
+cl_yes_no <- function(prompt,
                    yes_action, yes_message,
                    no_action = invisible(), no_message,
                    yes_opts = c("Yes", "Duh!", "Absolutely", "Please", "Obvi, yeah."),
@@ -117,5 +118,3 @@ yes_no <- function(prompt,
   }
 
 }
-
-
