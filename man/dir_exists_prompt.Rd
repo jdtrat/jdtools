@@ -4,7 +4,7 @@
 \alias{dir_exists_prompt}
 \title{Check a directory exists}
 \usage{
-dir_exists_prompt(.path, exists_action, exists_message)
+dir_exists_prompt(.path)
 }
 \arguments{
 \item{.path}{The path where an action is to be executed.}

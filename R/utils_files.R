@@ -20,7 +20,7 @@
 #'   }
 #' }
 #'
-dir_exists_prompt <- function(.path, exists_action, exists_message) {
+dir_exists_prompt <- function(.path) {
 
   file_dir <- get_file_dir(.path = .path)
 
