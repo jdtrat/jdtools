@@ -118,3 +118,48 @@ cl_yes_no <- function(prompt,
   }
 
 }
+
+#' Ask Text Questions via the Console
+#'
+#' This function allows you to interact with a user by posing questions that
+#' accept text input. It's inspired by [usethis::ui_yeah()] and
+#' [shiny::textInput()]. It wraps [base::readline()] with [cli::cli_text()]
+#' allowing you to format questions using the `cli` package.
+#'
+#' @param prompt A character string with the question to be asked. Passed into
+#'   [cli::cli_text()] and can use its theming syntax.
+#' @param .envir Used to ensure that [cli::cli_text()] evaluates the prompt,
+#'   yes_message, and no_message in the appropriate environment. Expert use
+#'   only.
+#'
+#' @return A character string containing the user's response.
+#' @export
+#'
+#' @examples
+#'
+#' favorite_cat_question <- function() {
+#'   answer <- cl_text_input("Name your {.strong favorite} cat.")
+#'   if (tolower(answer) != "tucker") {
+#'     cli::cli_alert_danger("\U1F63E Come meet my cat, Tucker, and I think you'll change your mind!")
+#'   } else {
+#'     cli::cli_alert_success("Correct answer! \U1F63B")
+#'   }
+#' }
+#'
+#' favorite_dog_question <- function() {
+#'   answer <- cl_text_input("Name your {.strong favorite} dog.")
+#'   if (tolower(answer) != "ella") {
+#'     cli::cli_alert_danger("\U1F44E Come meet my dog, Ella, and I think you'll change your mind!")
+#'   } else {
+#'     cli::cli_alert_success("Correct answer!\U1F436")
+#'   }
+#' }
+#'
+#' if (interactive()) favorite_cat_question()
+#'
+#' if (interactive()) favorite_dog_question()
+#'
+cl_text_input <- function(prompt, .envir = parent.frame(1)) {
+  if (!interactive()) cli::cli_abort("Non-interactive session.")
+  readline(prompt = cli::cli_text(prompt, .envir = .envir))
+}
