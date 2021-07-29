@@ -1,0 +1,55 @@
+url: https://jdtools.jdtrat.com
+repo:
+    home: https://github.com/jdtrat/jdtools/
+    source: https://github.com/jdtrat/jdtools/blob/master/
+    issue: https://github.com/jdtrat/jdtools/issues/
+    user: https://github.com/jdtrat/
+authors:
+  Jonathan Trattner:
+    href: "https://jdtrat.com"
+home:
+  strip_header: true
+reference:
+- title: "Command Line Tools"
+  desc: >
+    Functions for interacting with users via the command line.
+  contents:
+    - cl_yes_no
+    - cl_text_input
+- title: "Saving and Loading Objects"
+  desc: >
+    Functions for more easily saving and loading R (.RDS) objects with RStudio.
+  contents:
+    - save_object
+    - load_object
+    - set_object_path
+    - get_object_path
+    - unset_object_path
+- title: "File Functions"
+  decc: >
+    Functions for manipulating files with R in RStudio.
+  contents:
+    - file_open
+    - file_new
+    - file_new_r
+    - file_new_stan
+    - file_new_js
+    - file_new_css
+    - file_new_html
+    - file_new_text
+    - file_new_md
+    - file_new_rmd
+- title: "Strings and Identifiers"
+  desc: >
+    Functions for working with strings and creating unique identifiers.
+  contents:
+    - extract_before
+    - extract_after
+    - extract_between
+    - time_string
+    - rand_str
+- title: "Vector Manipulations"
+  decc: >
+    Functions for working with vectors.
+  contents:
+    - vec_between
