@@ -8,7 +8,7 @@ authors:
   Jonathan Trattner:
     href: "https://jdtrat.com"
 home:
-  strip_header: true
+  strip_header: false
 reference:
 - title: "Command Line Tools"
   desc: >
@@ -31,14 +31,6 @@ reference:
   contents:
     - file_open
     - file_new
-    - file_new_r
-    - file_new_stan
-    - file_new_js
-    - file_new_css
-    - file_new_html
-    - file_new_text
-    - file_new_md
-    - file_new_rmd
 - title: "Strings and Identifiers"
   desc: >
     Functions for working with strings and creating unique identifiers.
