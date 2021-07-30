@@ -7,10 +7,16 @@
     <loc>https://jdtools.jdtrat.com/reference/check_unique.html</loc>
   </url>
   <url>
+    <loc>https://jdtools.jdtrat.com/reference/cl_text_action.html</loc>
+  </url>
+  <url>
     <loc>https://jdtools.jdtrat.com/reference/cl_text_input.html</loc>
   </url>
   <url>
-    <loc>https://jdtools.jdtrat.com/reference/cl_yes_no.html</loc>
+    <loc>https://jdtools.jdtrat.com/reference/cl_yes_no_action.html</loc>
+  </url>
+  <url>
+    <loc>https://jdtools.jdtrat.com/reference/cl_yes_no_lgl.html</loc>
   </url>
   <url>
     <loc>https://jdtools.jdtrat.com/reference/create_env_pw.html</loc>

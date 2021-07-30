@@ -144,13 +144,25 @@ only.</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A character string containing the user's response.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>In general, I would recommend using <code><a href='cl_text_action.html'>cl_text_action</a></code> as it
+accepts code to execute depending on the user's input, but this function is
+perhaps more adaptable.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other command-line-tools: 
+<code><a href='cl_text_action.html'>cl_text_action</a>()</code>,
+<code><a href='cl_yes_no_action.html'>cl_yes_no_action</a>()</code>,
+<code><a href='cl_yes_no_lgl.html'>cl_yes_no_lgl</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='va'>favorite_cat_question</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>{</span>
   <span class='va'>answer</span> <span class='op'>&lt;-</span> <span class='fu'>cl_text_input</span><span class='op'>(</span><span class='st'>"Name your {.strong favorite} cat."</span><span class='op'>)</span>
   <span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/chartr.html'>tolower</a></span><span class='op'>(</span><span class='va'>answer</span><span class='op'>)</span> <span class='op'>!=</span> <span class='st'>"tucker"</span><span class='op'>)</span> <span class='op'>{</span>
-    <span class='fu'>cli</span><span class='fu'>::</span><span class='fu'><a href='https://cli.r-lib.org/reference/cli_alert.html'>cli_alert_danger</a></span><span class='op'>(</span><span class='st'>"\U1F63E Come meet my cat, Tucker, and I think you'll change your mind!"</span><span class='op'>)</span>
+    <span class='fu'>cli</span><span class='fu'>::</span><span class='fu'><a href='https://cli.r-lib.org/reference/cli_alert.html'>cli_alert_danger</a></span><span class='op'>(</span><span class='st'>"\U1F63E Come meet my cat, Tucker,
+    and I think you'll change your mind!"</span><span class='op'>)</span>
   <span class='op'>}</span> <span class='kw'>else</span> <span class='op'>{</span>
     <span class='fu'>cli</span><span class='fu'>::</span><span class='fu'><a href='https://cli.r-lib.org/reference/cli_alert.html'>cli_alert_success</a></span><span class='op'>(</span><span class='st'>"Correct answer! \U1F63B"</span><span class='op'>)</span>
   <span class='op'>}</span>
@@ -159,7 +171,8 @@ only.</p></td>
 <span class='va'>favorite_dog_question</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>{</span>
   <span class='va'>answer</span> <span class='op'>&lt;-</span> <span class='fu'>cl_text_input</span><span class='op'>(</span><span class='st'>"Name your {.strong favorite} dog."</span><span class='op'>)</span>
   <span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/chartr.html'>tolower</a></span><span class='op'>(</span><span class='va'>answer</span><span class='op'>)</span> <span class='op'>!=</span> <span class='st'>"ella"</span><span class='op'>)</span> <span class='op'>{</span>
-    <span class='fu'>cli</span><span class='fu'>::</span><span class='fu'><a href='https://cli.r-lib.org/reference/cli_alert.html'>cli_alert_danger</a></span><span class='op'>(</span><span class='st'>"\U1F44E Come meet my dog, Ella, and I think you'll change your mind!"</span><span class='op'>)</span>
+    <span class='fu'>cli</span><span class='fu'>::</span><span class='fu'><a href='https://cli.r-lib.org/reference/cli_alert.html'>cli_alert_danger</a></span><span class='op'>(</span><span class='st'>"\U1F44E Come meet my dog, Ella,
+    and I think you'll change your mind!"</span><span class='op'>)</span>
   <span class='op'>}</span> <span class='kw'>else</span> <span class='op'>{</span>
     <span class='fu'>cli</span><span class='fu'>::</span><span class='fu'><a href='https://cli.r-lib.org/reference/cli_alert.html'>cli_alert_success</a></span><span class='op'>(</span><span class='st'>"Correct answer!\U1F436"</span><span class='op'>)</span>
   <span class='op'>}</span>
