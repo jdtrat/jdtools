@@ -2,7 +2,7 @@
 % Please edit documentation in R/misc.R
 \name{\%nin\%}
 \alias{\%nin\%}
-\title{Value Matching}
+\title{Inverse Value Matching}
 \usage{
 x \%nin\% table
 }
