@@ -14,7 +14,9 @@ reference:
   desc: >
     Functions for interacting with users via the command line.
   contents:
-    - cl_yes_no
+    - cl_yes_no_action
+    - cl_text_action
+    - cl_yes_no_lgl
     - cl_text_input
 - title: "Saving and Loading Objects"
   desc: >

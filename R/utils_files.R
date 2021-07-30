@@ -25,7 +25,7 @@ dir_exists_prompt <- function(.path) {
   file_dir <- get_file_dir(.path = .path)
 
   if (!fs::dir_exists(file_dir)) {
-    cl_yes_no("It looks like you're attempting something in a directory {.file {file_dir}} that doesn't exist yet. Would you like to create it?",
+    cl_yes_no_action("It looks like you're attempting something in a directory {.file {file_dir}} that doesn't exist yet. Would you like to create it?",
            yes_action = {
              fs::dir_create(file_dir)
              return(TRUE)
@@ -68,7 +68,7 @@ overwrite_file <- function(.path) {
 
   # If file does exist, ask user if they want to overwrite it.
   if (fs::file_exists(.path)) {
-    cl_yes_no("The file {.file {.path}} already exists. Would you like to overwrite it?",
+    cl_yes_no_action("The file {.file {.path}} already exists. Would you like to overwrite it?",
            yes_action = return(TRUE),
            no_action = return(FALSE),
            no_message = "Okay, not overwriting {.file {.path}}.")

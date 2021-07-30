@@ -23,12 +23,18 @@ accept text input. It's inspired by \code{\link[usethis:ui-questions]{usethis::u
 \code{\link[shiny:textInput]{shiny::textInput()}}. It wraps \code{\link[base:readline]{base::readline()}} with \code{\link[cli:cli_text]{cli::cli_text()}}
 allowing you to format questions using the \code{cli} package.
 }
+\details{
+In general, I would recommend using \code{\link{cl_text_action}} as it
+accepts code to execute depending on the user's input, but this function is
+perhaps more adaptable.
+}
 \examples{
 
 favorite_cat_question <- function() {
   answer <- cl_text_input("Name your {.strong favorite} cat.")
   if (tolower(answer) != "tucker") {
-    cli::cli_alert_danger("\U1F63E Come meet my cat, Tucker, and I think you'll change your mind!")
+    cli::cli_alert_danger("\U1F63E Come meet my cat, Tucker,
+    and I think you'll change your mind!")
   } else {
     cli::cli_alert_success("Correct answer! \U1F63B")
   }
@@ -37,7 +43,8 @@ favorite_cat_question <- function() {
 favorite_dog_question <- function() {
   answer <- cl_text_input("Name your {.strong favorite} dog.")
   if (tolower(answer) != "ella") {
-    cli::cli_alert_danger("\U1F44E Come meet my dog, Ella, and I think you'll change your mind!")
+    cli::cli_alert_danger("\U1F44E Come meet my dog, Ella,
+    and I think you'll change your mind!")
   } else {
     cli::cli_alert_success("Correct answer!\U1F436")
   }
@@ -48,3 +55,10 @@ if (interactive()) favorite_cat_question()
 if (interactive()) favorite_dog_question()
 
 }
+\seealso{
+Other command-line-tools: 
+\code{\link{cl_text_action}()},
+\code{\link{cl_yes_no_action}()},
+\code{\link{cl_yes_no_lgl}()}
+}
+\concept{command-line-tools}
