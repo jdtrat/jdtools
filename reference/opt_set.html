@@ -49,8 +49,17 @@ package-specific options. The
 withr
 package describes the dangers of changing the landscape of R by modifying
 things like search paths, global options, or working directories.
-Specifically, they write &quot;If the behavior of other functions differs before
-and after running your function, you've modified the landscape.&quot;" />
+Specifically, they write &quot;If the behavior of other functions differs
+before and after running your function, you've modified the landscape.&quot;
+The withr package provides elegant solutions that are more in-line with
+best practices. However, I found that there options I'd like to use within
+personal packages, such as jdtools, and I believe it makes sense to
+modify the R landscape. To avoid potential issues as best as possible, the
+set of functions here prefix any options with a package name.
+This allows users to make some changes to the R landscape but in a more
+controlled manner that should avoid many conflicts.
+Thanks to TJ Mahr, Tan Ho, and Tyler Grant Smith for providing code
+that helped solve option-setting issues." />
 <meta property="og:image" content="https://jdtools.jdtrat.com/reference/figures/logo.png" />
 <meta property="og:image:alt" content="jdtools package" />
 <meta name="twitter:card" content="summary" />
@@ -159,8 +168,17 @@ package-specific options. The
 <a href='https://withr.r-lib.org/articles/changing-and-restoring-state.html'>withr</a>
 package describes the dangers of changing the landscape of R by modifying
 things like search paths, global options, or working directories.
-Specifically, they write "If the behavior of <em>other</em> functions differs before
-and after running your function, you've modified the landscape."</p>
+Specifically, they write "If the behavior of <em>other</em> functions differs
+before and after running your function, you've modified the landscape."</p>
+<p>The <code>withr</code> package provides elegant solutions that are more in-line with
+best practices. However, I found that there options I'd like to use within
+personal packages, such as <code>jdtools</code>, and I believe it makes sense to
+modify the R landscape. To avoid potential issues as best as possible, the
+set of functions here prefix any options with a package name.</p>
+<p>This allows users to make some changes to the R landscape but in a more
+controlled manner that should avoid many conflicts.</p>
+<p>Thanks to <a href='https://github.com/tjmahr'>TJ Mahr</a>, <a href='https://github.com/tanho63'>Tan Ho</a>, and Tyler Grant Smith for providing code
+that helped solve option-setting issues.</p>
     </div>
 
     <pre class="usage"><span class='fu'>opt_set</span><span class='op'>(</span><span class='va'>option</span>, <span class='va'>package</span><span class='op'>)</span>
@@ -185,9 +203,9 @@ and after running your function, you've modified the landscape."</p>
       <td><p>A character string corresponding to the package name whose
 prefix you would like to set.If the package parameter is not supplied,
 these functions assume you are working on a package and will prefix the
-options with the name of the package via <code><a href='https://rdrr.io/pkg/desc/man/desc_get.html'>desc::desc_get()</a></code>. If you do not pass
-in a package parameter and are not working on a package, an error will be
-thrown. Can also set the package parameter globally with
+options with the name of the package via <code><a href='https://rdrr.io/pkg/desc/man/desc_get.html'>desc::desc_get()</a></code>. If you do not
+pass in a package parameter and are not working on a package, an error will
+be thrown. Can also set the package parameter globally with
 <code><a href='https://rdrr.io/r/base/options.html'>options(jdtools.opts_package_name = "THE_PACKAGE_NAME")</a></code>.</p></td>
     </tr>
     </table>
@@ -196,15 +214,6 @@ thrown. Can also set the package parameter globally with
 
     <p>Either nothing, when used for option manipulations, or character
 vectors of existing options.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>The <code>withr</code> package provides elegant solutions that are more in-line with
-best practices. However, I found that there options I'd like to use within
-personal packages, such as <code>jdtools</code>, and I believe it makes sense to modify
-the R landscape. To avoid potential issues as best as possible, the set of
-functions here prefix any options with a package name.</p>
-<p>This allows users to make some changes to the R landscape but in a more
-controlled manner that should avoid many conflicts.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
