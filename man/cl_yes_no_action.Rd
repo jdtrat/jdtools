@@ -20,7 +20,7 @@ cl_yes_no_action(
 }
 \arguments{
 \item{prompt}{A character string with the yes/no question to be asked. Passed
-into \code{\link[cli:cli_text]{cli::cli_text()}} and can use its theming syntax.}
+into \code{\link[cli:cli_text]{cli::cli_text()}} and can use its theming syntax. If you wish to supply no prompt, pass in an empty character string: \code{""}.}
 
 \item{yes_action}{Code to execute upon a "yes" answer.}
 

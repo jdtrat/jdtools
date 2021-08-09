@@ -26,9 +26,7 @@ pull_jdtools <- function(...) {
 #' @export
 #'
 rs <- function(command = "") {
-  if (!rstudioapi::isAvailable()) {
-    cli::cli_abort("Oops. Looks like you're not using RStudio.")
-  }
+  check_rstudio()
   rstudioapi::restartSession(command = command)
 }
 
@@ -84,4 +82,27 @@ rs <- function(command = "") {
 #'
 `%nin%` <- function(x, table) {
   !match(x, table, nomatch = 0L) > 0L
+}
+
+# Utility function to check if the user is using RStudio. If not, throw an
+# error. If they are, return. The alternative parameter is TRUE then don't throw
+# an error.
+check_rstudio <- function(alternative = FALSE) {
+
+  if (alternative) {
+    return()
+  }
+
+  if (!rstudioapi::isAvailable()) {
+    cli::cli_abort("Oops. Looks like you're not using RStudio.")
+  } else {
+    return()
+  }
+
+}
+
+# Utility function to check if current RStudio browser is in dark mode.
+# Returns TRUE or FALSE. If not using RStudio, return FALSE.
+is_rstudio_dark <- function() {
+  if (!rstudioapi::isAvailable()) FALSE else rstudioapi::getThemeInfo()$dark
 }
