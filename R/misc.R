@@ -26,7 +26,9 @@ pull_jdtools <- function(...) {
 #' @export
 #'
 rs <- function(command = "") {
-  check_rstudio()
+  if (!rstudioapi::isAvailable()) {
+    cli::cli_abort("Oops. Looks like you're not using RStudio.")
+  }
   rstudioapi::restartSession(command = command)
 }
 
