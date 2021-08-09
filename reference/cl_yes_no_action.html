@@ -40,11 +40,6 @@
 <link href="../jdtrat/jdtrat.css" rel="stylesheet">
 <link href="../jdtrat/jdtrat-2.css" rel="stylesheet">
 
-<!-- highlight.js -->
-<link rel="stylesheet" href="../highlight/styles/tomorrow-night-blue.min.css">
-<script src = "../highlight/highlight.min.js"></script>
-<script>hljs.highlightAll();</script>
-
 
 
 
@@ -180,7 +175,7 @@ will be executed upon a user responding "yes" or "no."</p>
     <tr>
       <th>prompt</th>
       <td><p>A character string with the yes/no question to be asked. Passed
-into <code><a href='https://cli.r-lib.org/reference/cli_text.html'>cli::cli_text()</a></code> and can use its theming syntax.</p></td>
+into <code><a href='https://cli.r-lib.org/reference/cli_text.html'>cli::cli_text()</a></code> and can use its theming syntax. If you wish to supply no prompt, pass in an empty character string: <code>""</code>.</p></td>
     </tr>
     <tr>
       <th>yes_action</th>

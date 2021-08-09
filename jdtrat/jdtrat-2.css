@@ -27,8 +27,14 @@
 }
 
 pre {
-  border: none;
-}#c5e4f7
+  border: 1px solid #1a57a885;
+  background-color: #ddf0fc;
+  border-radius: 0.75rem;
+}
+
+pre, code {
+  background-color: #ddf0fc;
+}
 
 .page-header {
   border-bottom: 1px solid #1a57a885;

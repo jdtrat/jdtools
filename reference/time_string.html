@@ -40,11 +40,6 @@
 <link href="../jdtrat/jdtrat.css" rel="stylesheet">
 <link href="../jdtrat/jdtrat-2.css" rel="stylesheet">
 
-<!-- highlight.js -->
-<link rel="stylesheet" href="../highlight/styles/tomorrow-night-blue.min.css">
-<script src = "../highlight/highlight.min.js"></script>
-<script>hljs.highlightAll();</script>
-
 
 
 
@@ -178,10 +173,10 @@ prototyping data storage pipelines where the actual file name may be unknown.</p
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='fu'>time_string</span><span class='op'>(</span>length <span class='op'>=</span> <span class='fl'>4</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "5445"</div><div class='input'><span class='fu'>time_string</span><span class='op'>(</span>length <span class='op'>=</span> <span class='fl'>6</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "925445"</div><div class='input'><span class='co'># Will throw a warning</span>
+</div><div class='output co'>#&gt; [1] "0549"</div><div class='input'><span class='fu'>time_string</span><span class='op'>(</span>length <span class='op'>=</span> <span class='fl'>6</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "540549"</div><div class='input'><span class='co'># Will throw a warning</span>
 <span class='fu'>time_string</span><span class='op'>(</span>length <span class='op'>=</span> <span class='fl'>4646</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: Only 10 digits make up the number of seconds since January, 1970. Ignoring supplied length, and defaulting to 10 digits.</span></div><div class='output co'>#&gt; [1] "1627925445"</div><div class='input'>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Only 10 digits make up the number of seconds since January, 1970. Ignoring supplied length, and defaulting to 10 digits.</span></div><div class='output co'>#&gt; [1] "1628540549"</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
