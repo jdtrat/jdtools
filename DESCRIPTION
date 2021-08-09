@@ -10,7 +10,7 @@ Authors@R:
 Description: Provides useful functions for a variety of programming challenges in R.
 License: MIT + file LICENSE
 URL: https://jdtools.jdtrat.com, https://github.com/jdtrat/jdtools
-BugReports:https://github.com/jdtrat/jdtools/issues
+BugReports: https://github.com/jdtrat/jdtools/issues
 Encoding: UTF-8
 Language: es
 LazyData: true
@@ -27,7 +27,8 @@ Imports:
     crayon,
     rstudioapi,
     remotes,
-    purrr
+    purrr,
+    desc
 Suggests: 
     testthat (>= 3.0.0),
     usethis,
