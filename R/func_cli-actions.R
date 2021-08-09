@@ -8,7 +8,7 @@
 #' \code{\link{cl_yes_no_lgl}}.
 #'
 #' @param prompt A character string with the yes/no question to be asked. Passed
-#'   into [cli::cli_text()] and can use its theming syntax.
+#'   into [cli::cli_text()] and can use its theming syntax. If you wish to supply no prompt, pass in an empty character string: `""`.
 #' @param yes_action Code to execute upon a "yes" answer.
 #' @param yes_message (Optional) message to display upon a "yes" answer. Passed
 #'   into [cli::cli_alert_success()] and can use its theming syntax.
@@ -111,7 +111,9 @@ cl_yes_no_action <- function(prompt,
     opts <- sample(opts)
   }
 
-  cli::cli_text(prompt, .envir = .envir)
+  if (!prompt == "")  {
+    cli::cli_text(prompt, .envir = .envir)
+  }
 
   out <- utils::menu(choices = opts)
 
