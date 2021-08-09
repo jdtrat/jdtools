@@ -24,9 +24,9 @@ opt_rm_all(package)
 \item{package}{A character string corresponding to the package name whose
 prefix you would like to set.If the package parameter is not supplied,
 these functions assume you are working on a package and will prefix the
-options with the name of the package via \code{\link[desc:desc_get]{desc::desc_get()}}. If you do not pass
-in a package parameter and are not working on a package, an error will be
-thrown. Can also set the package parameter globally with
+options with the name of the package via \code{\link[desc:desc_get]{desc::desc_get()}}. If you do not
+pass in a package parameter and are not working on a package, an error will
+be thrown. Can also set the package parameter globally with
 \code{options(jdtools.opts_package_name = "THE_PACKAGE_NAME")}.}
 }
 \value{
@@ -39,18 +39,20 @@ package-specific options. The
 \href{https://withr.r-lib.org/articles/changing-and-restoring-state.html}{withr}
 package describes the dangers of changing the landscape of R by modifying
 things like search paths, global options, or working directories.
-Specifically, they write "If the behavior of \emph{other} functions differs before
-and after running your function, you've modified the landscape."
-}
-\details{
+Specifically, they write "If the behavior of \emph{other} functions differs
+before and after running your function, you've modified the landscape."
+
 The \code{withr} package provides elegant solutions that are more in-line with
 best practices. However, I found that there options I'd like to use within
-personal packages, such as \code{jdtools}, and I believe it makes sense to modify
-the R landscape. To avoid potential issues as best as possible, the set of
-functions here prefix any options with a package name.
+personal packages, such as \code{jdtools}, and I believe it makes sense to
+modify the R landscape. To avoid potential issues as best as possible, the
+set of functions here prefix any options with a package name.
 
 This allows users to make some changes to the R landscape but in a more
 controlled manner that should avoid many conflicts.
+
+Thanks to \href{https://github.com/tjmahr}{TJ Mahr}, \href{https://github.com/tanho63}{Tan Ho}, and Tyler Grant Smith for providing code
+that helped solve option-setting issues.
 }
 \examples{
 
