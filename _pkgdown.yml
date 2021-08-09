@@ -1,14 +1,67 @@
+destination: docs
+
 url: https://jdtools.jdtrat.com
 repo:
     home: https://github.com/jdtrat/jdtools/
     source: https://github.com/jdtrat/jdtools/blob/master/
     issue: https://github.com/jdtrat/jdtools/issues/
     user: https://github.com/jdtrat/
+
+template:
+  package: jdtdown
+  opengraph:
+    image:
+      src: man/figures/logo.png
+      alt: "jdtools package"
+    twitter:
+      creator: "@jdtrat"
+      card: summary
+
 authors:
   Jonathan Trattner:
     href: "https://jdtrat.com"
+
+development:
+  mode: auto
+
 home:
-  strip_header: false
+  strip_header: true
+  links:
+  - text: Learn more
+    href: ""
+
+# structure of website themed with jdtdown
+# based on structure of jdtdown
+navbar:
+  title: ~
+  type: default
+  structure:
+    left:  [intro, examples, articles]
+    right: [reference, news, github]
+  components:
+    home:
+    articles:
+      text: Articles
+      menu:
+        - text: "No Article"
+    reference:
+      text: Reference
+      href: reference/index.html
+    github:
+      icon: fab fa-github fa-lg
+      href: https://github.com/jdtrat/jdtools
+    news:
+      text: News
+      menu:
+        - text: "Changelog"
+          href: news/index.html
+        - text: "------------------"
+        - text: "Blog posts"
+        # Add blog post where a released version is mentioned.
+        - text: "No blog post"
+        # - text: Version 0.2
+        #   href: <url>
+
 reference:
 - title: "Command Line Tools"
   desc: >
@@ -33,6 +86,15 @@ reference:
   contents:
     - file_open
     - file_new
+- title: "Working with Options"
+  decc: >
+    Functions for working with (package-specific) options.
+  contents:
+    - opt_set
+    - opt_get
+    - opt_ls
+    - opt_rm
+    - opt_rm_all
 - title: "Strings and Identifiers"
   desc: >
     Functions for working with strings and creating unique identifiers.
