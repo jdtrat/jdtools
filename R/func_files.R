@@ -164,3 +164,100 @@ file_open <- function(path, ...) {
     )
   }
 }
+
+#' Copy Existing Files to a new Directory
+#'
+#' This function is a wrapper around [fs::file_copy()], with the modification that,
+#' if a file exists at the `new_path` the user will be prompted to overwrite it.
+#'
+#' @param path A character string of the file path to be copied.
+#' @param new_path A character string of the path where the file should be
+#'   copied to.
+#'
+#' @return The new path (invisibly) if the file is copied. Nothing otherwise.
+#' @export
+#'
+#' @examples
+#'
+#' if (interactive()) {
+#'   # Create a test file
+#'   jdtools::file_new_text("test-file_copy", open = FALSE)
+#'
+#'   # Copy the file with no problem
+#'   jdtools::file_copy(path = "test-file_copy.txt",
+#'                      new_path = "test-file_copy-2.txt")
+#'   # Upon repeating, this will prompt the user whether or nott
+#'   # test-file_copy-2.txt should be overwritten.
+#'   jdtools::file_copy(path = "test-file_copy.txt",
+#'                      new_path = "test-file_copy-2.txt")
+#'
+#'   # A copied file can be piped into `jdtools::file_open()`
+#'   jdtools::file_copy(path = "test-file_copy.txt",
+#'                      new_path = "test-file_copy-3.txt") %>%
+#'     jdtools::file_open()
+#'
+#' }
+#'
+#'
+file_copy <- function(path, new_path) {
+
+  tryCatch(fs::file_copy(path = path,
+                new_path = new_path,
+                overwrite = overwrite_file(new_path)),
+           error = function(e) invisible(),
+           finally = invisible(new_path)
+  )
+
+}
+
+#' Delete Files
+#'
+#' This function is a wrapper around [fs::file_delete()], with the a
+#' console-based confirmation and, if `ask = TRUE`, the user
+#' will be prompted to confirm the deletion.
+#'
+#' @param path A character vector of the file path(s) to be deleted.
+#' @param ask Logical: FALSE by default. Should the user be prompted whether or
+#'   not the file(s) should be deleted?
+#'
+#' @return The deleted file path(s) (invisibly).
+#' @export
+#'
+#' @examples
+#'
+#' if (interactive()) {
+#'   # Create multiple files -- not opening them
+#'   jdtools::file_new_text("test-file_delete", open = FALSE)
+#'   jdtools::file_new_r("test-file_delete", open = FALSE)
+#'   jdtools::file_new_md("test-file_delete", open = FALSE)
+#'   jdtools::file_new_js("test-file_delete", open = FALSE)
+#'
+#'   # Just delete the text file
+#'   file_delete(path = "test-file_delete.txt",
+#'               ask = FALSE)
+#'
+#'   # Ask about whether to delete the R file
+#'   file_delete(path = "test-file_delete.R",
+#'               ask = TRUE)
+#'
+#'   # Ask about whether to delete the markdown and JavaScript files
+#'   file_delete(path = c("test-file_delete.md", "test-file_delete.js"),
+#'               ask = TRUE)
+#' }
+#'
+#'
+file_delete <- function(path, ask = FALSE) {
+  if (ask) {
+    cl_yes_no_action("Are you sure you want to delete the file{?s} {.file {path}}?",
+                     yes_action = {
+                       fs::file_delete(path)
+                       invisible(path)
+                       },
+                     yes_message = "Okay, the file{?s} {.file {path}} {?has/have} been deleted.",
+                     no_message = "Okay, not deleting {?/the/the} {.file {path}} file{?s}.")
+  } else {
+    fs::file_delete(path)
+    cli::cli_alert_success("Okay, the file{?s} {.file {path}} {?has/have} been deleted.")
+    invisible(path)
+  }
+}

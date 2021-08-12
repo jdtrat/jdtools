@@ -82,9 +82,8 @@ overwrite_file <- function(.path) {
 }
 
 get_file_dir <- function(.path) {
-  dir <- extract_between(full_string = .path,
-                         after_string = paste0(here::here(), "/"),
-                         before_string = "\\/")
+
+  dir <- fs::path_dir(path = .path)
 
   if (length(dir) == 0) {
     cli::cli_abort("Parent directory of {.file .path} not detected.")
@@ -97,8 +96,12 @@ get_file_dir <- function(.path) {
 create_file <- function(.path, .open) {
   if (overwrite_file(.path = .path)) {
     fs::file_create(.path)
-    cli::cli_alert_success("Created {.file {.path}}. Opening now!")
-    if (.open) rstudioapi::navigateToFile(.path)
+    if (.open) {
+      cli::cli_alert_success("Created {.file {.path}}. Opening now!")
+      rstudioapi::navigateToFile(.path)
+    } else if (!.open) {
+      cli::cli_alert_success("Created {.file {.path}}.")
+    }
   }
 }
 

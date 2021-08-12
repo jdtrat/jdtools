@@ -86,6 +86,8 @@ reference:
   contents:
     - file_open
     - file_new
+    - file_copy
+    - file_delete
 - title: "Working with Options"
   decc: >
     Functions for working with (package-specific) options.
