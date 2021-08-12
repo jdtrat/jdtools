@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get a Character String of Seconds since January, 1970 — time_string • jdtools</title>
+<title>Copy Existing Files to a new Directory — file_copy • jdtools</title>
 
 
 <!-- jquery -->
@@ -43,10 +43,9 @@
 
 
 
-<meta property="og:title" content="Get a Character String of Seconds since January, 1970 — time_string" />
-<meta property="og:description" content="This function returns a character string of user-defined length based on the
-current number of seconds since January 1st, 1970. It is useful for
-prototyping data storage pipelines where the actual file name may be unknown." />
+<meta property="og:title" content="Copy Existing Files to a new Directory — file_copy" />
+<meta property="og:description" content="This function is a wrapper around fs::file_copy(), with the modification that,
+if a file exists at the new_path the user will be prompted to overwrite it." />
 <meta property="og:image" content="https://jdtools.jdtrat.com/reference/figures/logo.png" />
 <meta property="og:image:alt" content="jdtools package" />
 <meta name="twitter:card" content="summary" />
@@ -144,39 +143,58 @@ prototyping data storage pipelines where the actual file name may be unknown." /
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get a Character String of Seconds since January, 1970</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jdtrat/jdtools/blob/master/R/func_strings-time.R'><code>R/func_strings-time.R</code></a></small>
-    <div class="hidden name"><code>time_string.Rd</code></div>
+    <h1>Copy Existing Files to a new Directory</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jdtrat/jdtools/blob/master/R/func_files.R'><code>R/func_files.R</code></a></small>
+    <div class="hidden name"><code>file_copy.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function returns a character string of user-defined length based on the
-current number of seconds since January 1st, 1970. It is useful for
-prototyping data storage pipelines where the actual file name may be unknown.</p>
+    <p>This function is a wrapper around <code><a href='http://fs.r-lib.org/reference/copy.html'>fs::file_copy()</a></code>, with the modification that,
+if a file exists at the <code>new_path</code> the user will be prompted to overwrite it.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>time_string</span><span class='op'>(</span><span class='va'>length</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>file_copy</span><span class='op'>(</span><span class='va'>path</span>, <span class='va'>new_path</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>length</th>
-      <td><p>Number of characters to make the string.</p></td>
+      <th>path</th>
+      <td><p>A character string of the file path to be copied.</p></td>
+    </tr>
+    <tr>
+      <th>new_path</th>
+      <td><p>A character string of the path where the file should be
+copied to.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A character string based on the current time since January 1st, 1970.</p>
+    <p>The new path (invisibly) if the file is copied. Nothing otherwise.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'>time_string</span><span class='op'>(</span>length <span class='op'>=</span> <span class='fl'>4</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "4701"</div><div class='input'><span class='fu'>time_string</span><span class='op'>(</span>length <span class='op'>=</span> <span class='fl'>6</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "774701"</div><div class='input'><span class='co'># Will throw a warning</span>
-<span class='fu'>time_string</span><span class='op'>(</span>length <span class='op'>=</span> <span class='fl'>4646</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: Only 10 digits make up the number of seconds since January, 1970. Ignoring supplied length, and defaulting to 10 digits.</span></div><div class='output co'>#&gt; [1] "1628774701"</div><div class='input'>
+<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='co'># Create a test file</span>
+  <span class='fu'>jdtools</span><span class='fu'>::</span><span class='fu'><a href='file_new.html'>file_new_text</a></span><span class='op'>(</span><span class='st'>"test-file_copy"</span>, open <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+
+  <span class='co'># Copy the file with no problem</span>
+  <span class='fu'>jdtools</span><span class='fu'>::</span><span class='fu'>file_copy</span><span class='op'>(</span>path <span class='op'>=</span> <span class='st'>"test-file_copy.txt"</span>,
+                     new_path <span class='op'>=</span> <span class='st'>"test-file_copy-2.txt"</span><span class='op'>)</span>
+  <span class='co'># Upon repeating, this will prompt the user whether or nott</span>
+  <span class='co'># test-file_copy-2.txt should be overwritten.</span>
+  <span class='fu'>jdtools</span><span class='fu'>::</span><span class='fu'>file_copy</span><span class='op'>(</span>path <span class='op'>=</span> <span class='st'>"test-file_copy.txt"</span>,
+                     new_path <span class='op'>=</span> <span class='st'>"test-file_copy-2.txt"</span><span class='op'>)</span>
+
+  <span class='co'># A copied file can be piped into `jdtools::file_open()`</span>
+  <span class='fu'>jdtools</span><span class='fu'>::</span><span class='fu'>file_copy</span><span class='op'>(</span>path <span class='op'>=</span> <span class='st'>"test-file_copy.txt"</span>,
+                     new_path <span class='op'>=</span> <span class='st'>"test-file_copy-3.txt"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+    <span class='fu'>jdtools</span><span class='fu'>::</span><span class='fu'><a href='file_open.html'>file_open</a></span><span class='op'>(</span><span class='op'>)</span>
+
+<span class='op'>}</span>
+
+
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
