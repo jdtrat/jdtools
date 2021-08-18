@@ -17,9 +17,6 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1.9000
 Imports: 
-    gargle,
-    sodium,
-    utils,
     glue,
     fs,
     here,
