@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get a Character String of Seconds since January, 1970 — time_string • jdtools</title>
+<title>How Many Unique Observations — how_many • jdtools</title>
 
 
 <!-- jquery -->
@@ -43,10 +43,11 @@
 
 
 
-<meta property="og:title" content="Get a Character String of Seconds since January, 1970 — time_string" />
-<meta property="og:description" content="This function returns a character string of user-defined length based on the
-current number of seconds since January 1st, 1970. It is useful for
-prototyping data storage pipelines where the actual file name may be unknown." />
+<meta property="og:title" content="How Many Unique Observations — how_many" />
+<meta property="og:description" content="This generic function calculates how many unique observations are in a vector
+It is identical to length(unique(x)). However, this function can be used on
+either a vector or a data frame with a specified column. See the examples for
+more details." />
 <meta property="og:image" content="https://jdtools.jdtrat.com/reference/figures/logo.png" />
 <meta property="og:image:alt" content="jdtools package" />
 <meta name="twitter:card" content="summary" />
@@ -144,39 +145,43 @@ prototyping data storage pipelines where the actual file name may be unknown." /
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get a Character String of Seconds since January, 1970</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jdtrat/jdtools/blob/master/R/func_strings-time.R'><code>R/func_strings-time.R</code></a></small>
-    <div class="hidden name"><code>time_string.Rd</code></div>
+    <h1>How Many Unique Observations</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jdtrat/jdtools/blob/master/R/func_how-many.R'><code>R/func_how-many.R</code></a></small>
+    <div class="hidden name"><code>how_many.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function returns a character string of user-defined length based on the
-current number of seconds since January 1st, 1970. It is useful for
-prototyping data storage pipelines where the actual file name may be unknown.</p>
+    <p>This generic function calculates how many unique observations are in a vector
+It is identical to <code><a href='https://rdrr.io/r/base/length.html'>length(unique(x))</a></code>. However, this function can be used on
+either a vector or a data frame with a specified column. See the examples for
+more details.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>time_string</span><span class='op'>(</span><span class='va'>length</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>how_many</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>length</th>
-      <td><p>Number of characters to make the string.</p></td>
+      <th>x</th>
+      <td><p>Object such as a data.frame or vector</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Additional arguments passed to or from other methods.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A character string based on the current time since January 1st, 1970.</p>
+    <p>An integer indicating how many unique observations are in the object.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'>time_string</span><span class='op'>(</span>length <span class='op'>=</span> <span class='fl'>4</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "1600"</div><div class='input'><span class='fu'>time_string</span><span class='op'>(</span>length <span class='op'>=</span> <span class='fl'>6</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "301600"</div><div class='input'><span class='co'># Will throw a warning</span>
-<span class='fu'>time_string</span><span class='op'>(</span>length <span class='op'>=</span> <span class='fl'>4646</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: Only 10 digits make up the number of seconds since January, 1970. Ignoring supplied length, and defaulting to 10 digits.</span></div><div class='output co'>#&gt; [1] "1629301600"</div><div class='input'>
+<span class='fu'>how_many</span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>$</span><span class='va'>cyl</span><span class='op'>)</span> <span class='co'># Pass in vector directly</span>
+</div><div class='output co'>#&gt; [1] 3</div><div class='input'><span class='fu'>how_many</span><span class='op'>(</span><span class='va'>mtcars</span>, <span class='st'>"cyl"</span><span class='op'>)</span> <span class='co'># Subset dataframe with a character string for column name</span>
+</div><div class='output co'>#&gt; [1] 3</div><div class='input'><span class='fu'>how_many</span><span class='op'>(</span><span class='va'>mtcars</span>, <span class='va'>cyl</span><span class='op'>)</span> <span class='co'># Subset dataframe without needing to quote the column name</span>
+</div><div class='output co'>#&gt; [1] 3</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

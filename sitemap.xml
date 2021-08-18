@@ -19,16 +19,13 @@
     <loc>https://jdtools.jdtrat.com/reference/cl_yes_no_lgl.html</loc>
   </url>
   <url>
-    <loc>https://jdtools.jdtrat.com/reference/create_env_pw.html</loc>
+    <loc>https://jdtools.jdtrat.com/reference/cls_abort.html</loc>
   </url>
   <url>
-    <loc>https://jdtools.jdtrat.com/reference/decrypt_token.html</loc>
+    <loc>https://jdtools.jdtrat.com/reference/cls_check.html</loc>
   </url>
   <url>
     <loc>https://jdtools.jdtrat.com/reference/dir_exists_prompt.html</loc>
-  </url>
-  <url>
-    <loc>https://jdtools.jdtrat.com/reference/encrypt_token.html</loc>
   </url>
   <url>
     <loc>https://jdtools.jdtrat.com/reference/extract_after.html</loc>
@@ -61,7 +58,16 @@
     <loc>https://jdtools.jdtrat.com/reference/get_possible_values.html</loc>
   </url>
   <url>
+    <loc>https://jdtools.jdtrat.com/reference/get_sub_name.html</loc>
+  </url>
+  <url>
     <loc>https://jdtools.jdtrat.com/reference/grapes-nin-grapes.html</loc>
+  </url>
+  <url>
+    <loc>https://jdtools.jdtrat.com/reference/how_many.html</loc>
+  </url>
+  <url>
+    <loc>https://jdtools.jdtrat.com/reference/how_many.data.frame.html</loc>
   </url>
   <url>
     <loc>https://jdtools.jdtrat.com/reference/opt_set.html</loc>

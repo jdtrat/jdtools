@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get a Character String of Seconds since January, 1970 — time_string • jdtools</title>
+<title>Abort Classes with Informative Message — cls_abort • jdtools</title>
 
 
 <!-- jquery -->
@@ -43,10 +43,12 @@
 
 
 
-<meta property="og:title" content="Get a Character String of Seconds since January, 1970 — time_string" />
-<meta property="og:description" content="This function returns a character string of user-defined length based on the
-current number of seconds since January 1st, 1970. It is useful for
-prototyping data storage pipelines where the actual file name may be unknown." />
+<meta property="og:title" content="Abort Classes with Informative Message — cls_abort" />
+<meta property="og:description" content="This function is adapted from
+gargle's
+abort_bad_class function. It provides an informative error message
+indicating the object and the class it must be for the function to work
+properly." />
 <meta property="og:image" content="https://jdtools.jdtrat.com/reference/figures/logo.png" />
 <meta property="og:image:alt" content="jdtools package" />
 <meta name="twitter:card" content="summary" />
@@ -144,39 +146,55 @@ prototyping data storage pipelines where the actual file name may be unknown." /
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get a Character String of Seconds since January, 1970</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jdtrat/jdtools/blob/master/R/func_strings-time.R'><code>R/func_strings-time.R</code></a></small>
-    <div class="hidden name"><code>time_string.Rd</code></div>
+    <h1>Abort Classes with Informative Message</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jdtrat/jdtools/blob/master/R/func_classes.R'><code>R/func_classes.R</code></a></small>
+    <div class="hidden name"><code>cls_abort.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function returns a character string of user-defined length based on the
-current number of seconds since January 1st, 1970. It is useful for
-prototyping data storage pipelines where the actual file name may be unknown.</p>
+    <p>This function is adapted from
+<a href='https://github.com/r-lib/gargle/blob/083acb186791c48294fd89f8d4fcb32cedc72aab/R/utils-ui.R#L172'>gargle</a>'s
+<code>abort_bad_class</code> function. It provides an informative error message
+indicating the object and the class it must be for the function to work
+properly.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>time_string</span><span class='op'>(</span><span class='va'>length</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>cls_abort</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>expected_class</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>length</th>
-      <td><p>Number of characters to make the string.</p></td>
+      <th>object</th>
+      <td><p>The object whose class should be checked.</p></td>
+    </tr>
+    <tr>
+      <th>expected_class</th>
+      <td><p>A character vector of expected (or allowed) classes.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A character string based on the current time since January 1st, 1970.</p>
+    
+
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'>time_string</span><span class='op'>(</span>length <span class='op'>=</span> <span class='fl'>4</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "1600"</div><div class='input'><span class='fu'>time_string</span><span class='op'>(</span>length <span class='op'>=</span> <span class='fl'>6</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "301600"</div><div class='input'><span class='co'># Will throw a warning</span>
-<span class='fu'>time_string</span><span class='op'>(</span>length <span class='op'>=</span> <span class='fl'>4646</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: Only 10 digits make up the number of seconds since January, 1970. Ignoring supplied length, and defaulting to 10 digits.</span></div><div class='output co'>#&gt; [1] "1629301600"</div><div class='input'>
+<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+
+  <span class='va'>is_df</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>{</span>
+    <span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>is.data.frame</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+      <span class='fu'>cls_abort</span><span class='op'>(</span><span class='va'>mtcars</span>, expected_class <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"character"</span>, <span class='st'>"numeric"</span><span class='op'>)</span><span class='op'>)</span>
+    <span class='op'>}</span>
+  <span class='op'>}</span>
+
+  <span class='fu'>is_df</span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>)</span>
+
+<span class='op'>}</span>
+
+
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

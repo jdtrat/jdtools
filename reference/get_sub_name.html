@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get a Character String of Seconds since January, 1970 — time_string • jdtools</title>
+<title>Get a Substituted Name as Character for Subsetting — get_sub_name • jdtools</title>
 
 
 <!-- jquery -->
@@ -43,10 +43,12 @@
 
 
 
-<meta property="og:title" content="Get a Character String of Seconds since January, 1970 — time_string" />
-<meta property="og:description" content="This function returns a character string of user-defined length based on the
-current number of seconds since January 1st, 1970. It is useful for
-prototyping data storage pipelines where the actual file name may be unknown." />
+<meta property="og:title" content="Get a Substituted Name as Character for Subsetting — get_sub_name" />
+<meta property="og:description" content="This generic function is primarily useful for functions that accept column names for
+subsetting data. The goal is to provide methods for users to supply either an
+unquoted column name or a quoted one (character string). It makes use of the
+fact that calling substitute() on a character string has a class
+&quot;character&quot;, and class &quot;name&quot; otherwise." />
 <meta property="og:image" content="https://jdtools.jdtrat.com/reference/figures/logo.png" />
 <meta property="og:image:alt" content="jdtools package" />
 <meta name="twitter:card" content="summary" />
@@ -144,39 +146,46 @@ prototyping data storage pipelines where the actual file name may be unknown." /
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get a Character String of Seconds since January, 1970</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jdtrat/jdtools/blob/master/R/func_strings-time.R'><code>R/func_strings-time.R</code></a></small>
-    <div class="hidden name"><code>time_string.Rd</code></div>
+    <h1>Get a Substituted Name as Character for Subsetting</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jdtrat/jdtools/blob/master/R/utils_subsets.R'><code>R/utils_subsets.R</code></a></small>
+    <div class="hidden name"><code>get_sub_name.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function returns a character string of user-defined length based on the
-current number of seconds since January 1st, 1970. It is useful for
-prototyping data storage pipelines where the actual file name may be unknown.</p>
+    <p>This generic function is primarily useful for functions that accept column names for
+subsetting data. The goal is to provide methods for users to supply either an
+unquoted column name or a quoted one (character string). It makes use of the
+fact that calling <code><a href='https://rdrr.io/r/base/substitute.html'>substitute()</a></code> on a character string has a class
+"character", and class "name" otherwise.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>time_string</span><span class='op'>(</span><span class='va'>length</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>get_sub_name</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>length</th>
-      <td><p>Number of characters to make the string.</p></td>
+      <th>x</th>
+      <td><p>The substituted column name.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A character string based on the current time since January 1st, 1970.</p>
+    <p>The character vector for use with subsetting data.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'>time_string</span><span class='op'>(</span>length <span class='op'>=</span> <span class='fl'>4</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "1600"</div><div class='input'><span class='fu'>time_string</span><span class='op'>(</span>length <span class='op'>=</span> <span class='fl'>6</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "301600"</div><div class='input'><span class='co'># Will throw a warning</span>
-<span class='fu'>time_string</span><span class='op'>(</span>length <span class='op'>=</span> <span class='fl'>4646</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: Only 10 digits make up the number of seconds since January, 1970. Ignoring supplied length, and defaulting to 10 digits.</span></div><div class='output co'>#&gt; [1] "1629301600"</div><div class='input'>
+<span class='va'>get_col</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>column</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='va'>name</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substitute.html'>substitute</a></span><span class='op'>(</span><span class='va'>column</span><span class='op'>)</span>
+  <span class='va'>data</span><span class='op'>[</span>, <span class='fu'>get_sub_name</span><span class='op'>(</span><span class='va'>name</span><span class='op'>)</span><span class='op'>]</span>
+<span class='op'>}</span>
+
+<span class='fu'>get_col</span><span class='op'>(</span><span class='va'>mtcars</span>, <span class='va'>hp</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;  [1] 110 110  93 110 175 105 245  62  95 123 123 180 180 180 205 215 230  66  52
+#&gt; [20]  65  97 150 150 245 175  66  91 113 264 175 335 109</div><div class='input'><span class='fu'>get_col</span><span class='op'>(</span><span class='va'>mtcars</span>, <span class='st'>"hp"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;  [1] 110 110  93 110 175 105 245  62  95 123 123 180 180 180 205 215 230  66  52
+#&gt; [20]  65  97 150 150 245 175  66  91 113 264 175 335 109</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
