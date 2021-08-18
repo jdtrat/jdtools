@@ -111,3 +111,11 @@ reference:
     Functions for working with vectors.
   contents:
     - vec_between
+- title: "Miscellaneous"
+  desc: >
+    Functions that don't fall as easily into categories but are useful utilities for a variety of tasks.
+  contents:
+    - cls_abort
+    - cls_check
+    - how_many
+    - get_sub_name
