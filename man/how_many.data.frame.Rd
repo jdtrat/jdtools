@@ -4,12 +4,14 @@
 \alias{how_many.data.frame}
 \title{This is the S3 method for class 'data.frame'}
 \usage{
-\method{how_many}{data.frame}(x, column)
+\method{how_many}{data.frame}(x, column, ...)
 }
 \arguments{
 \item{x}{Object of class 'data.frame'}
 
 \item{column}{The column of the data frame to be indexed into.}
+
+\item{...}{Additional arguments passed to or from other methods.}
 }
 \value{
 An integer indicating how many unique observations are in the object.

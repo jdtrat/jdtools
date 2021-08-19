@@ -12,7 +12,7 @@ cls_abort(object, expected_class)
 \item{expected_class}{A character vector of expected (or allowed) classes.}
 }
 \value{
-
+NA; triggers an error.
 }
 \description{
 This function is adapted from

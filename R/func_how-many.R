@@ -22,7 +22,7 @@ how_many <- function(x, ...) {
 }
 
 #' @export
-how_many.default <- function(x) {
+how_many.default <- function(x, ...) {
   length(unique(x))
 }
 
@@ -32,6 +32,7 @@ how_many.default <- function(x) {
 #'
 #' @param x Object of class 'data.frame'
 #' @param column The column of the data frame to be indexed into.
+#' @param ... Additional arguments passed to or from other methods.
 #'
 #' @return An integer indicating how many unique observations are in the object.
 #' @export
@@ -41,7 +42,7 @@ how_many.default <- function(x) {
 #' how_many(mtcars, "cyl") # Subset dataframe with a character string for column name
 #' how_many(mtcars, cyl) # Subset dataframe without needing to quote the column name
 #'
-how_many.data.frame <- function(x, column) {
+how_many.data.frame <- function(x, column, ...) {
   col <- get_sub_name(substitute(column))
   vec <- x[,col, drop = FALSE]
   vec <- vec[[col]]
