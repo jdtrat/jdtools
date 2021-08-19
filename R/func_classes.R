@@ -41,7 +41,7 @@ cls_abort <- function(object, expected_class) {
   msg <- glue::glue("{.arg {obj_name}} must be <<must_be>>, not of class {.cls {obj_class}}.",
                     .open = "<<", .close = ">>")
 
-  cli::cli_abort(msg)
+  cli::cli_abort(msg, class = "cls_abort")
 
 }
 
@@ -59,6 +59,10 @@ cls_abort <- function(object, expected_class) {
 #' @examples
 #'
 #' if (interactive()) {
+#'
+#'   int_vec <- 1:5
+#'   chr_vec <- c("a", "b", "c", "d", "e")
+#'   df <- data.frame(int_vec, chr_vec)
 #'
 #'   # No error
 #'   cls_check(int_vec, expected_class = "integer")
