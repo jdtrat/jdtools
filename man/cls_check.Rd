@@ -40,7 +40,9 @@ if (interactive()) {
 
 
   if (requireNamespace("tibble")) {
-    tbl_cars <- tibble::tibble(mtcars)
+    library(tibble)
+
+    tbl_cars <- tibble(mtcars)
 
     # See the classes of tbl_cars
     # 'tbl_df', 'tbl', and 'data.frame'

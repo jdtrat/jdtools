@@ -9,7 +9,7 @@
 #' @param object The object whose class should be checked.
 #' @param expected_class A character vector of expected (or allowed) classes.
 #'
-#' @return
+#' @return NA; triggers an error.
 #' @export
 #'
 #' @examples
@@ -78,7 +78,9 @@ cls_abort <- function(object, expected_class) {
 #'
 #'
 #'   if (requireNamespace("tibble")) {
-#'     tbl_cars <- tibble::tibble(mtcars)
+#'     library(tibble)
+#'
+#'     tbl_cars <- tibble(mtcars)
 #'
 #'     # See the classes of tbl_cars
 #'     # 'tbl_df', 'tbl', and 'data.frame'
