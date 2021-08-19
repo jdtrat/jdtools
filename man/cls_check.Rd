@@ -22,6 +22,10 @@ Easily check if an object has an expected class. This function checks that
 
 if (interactive()) {
 
+  int_vec <- 1:5
+  chr_vec <- c("a", "b", "c", "d", "e")
+  df <- data.frame(int_vec, chr_vec)
+
   # No error
   cls_check(int_vec, expected_class = "integer")
   # Error
