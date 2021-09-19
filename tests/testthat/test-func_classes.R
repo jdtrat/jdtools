@@ -28,10 +28,10 @@ test_that("`cls_check()` works - no error messages", {
 
 test_that("`cls_check()` works - error, regex", {
   expect_error(cls_check(int_vec, "numeric"),
-               regexp = "`object` must be <numeric>, not of class <integer>.")
+               regexp = "`int_vec` must be <numeric>, not of class <integer>.")
 
   expect_error(cls_check(chr_vec, "data.frame"),
-                regexp = "`object` must be <data.frame>, not of class <character>.")
+                regexp = "`chr_vec` must be <data.frame>, not of class <character>.")
 })
 
 test_that("`cls_check()` works - error, class", {

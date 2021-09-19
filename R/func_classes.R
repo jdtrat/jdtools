@@ -106,10 +106,14 @@ cls_abort <- function(object, expected_class) {
 #'
 cls_check <- function(object, expected_class) {
 
-  .class <- class(object)
+  obj_name <- deparse(substitute(object))
+  obj_class <- class(object)
 
-  if (all(.class %nin% expected_class)) {
-    cls_abort(object = object, expected_class = expected_class)
+  if (all(obj_class %nin% expected_class)) {
+    cli::cli_abort("{.arg {obj_name}} must be {.cls {expected_class}}, not of class {.cls {obj_class}}.",
+                   class = "cls_abort")
   }
-  invisible(.class)
+
+  invisible(obj_class)
+
 }
